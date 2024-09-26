@@ -1,5 +1,6 @@
 package com.invoiceprocessing.server.controller;
-
+import com.invoiceprocessing.server.model.Invoice;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,11 +9,18 @@ import org.springframework.web.bind.annotation.RestController;
 /*we have to tell spring boot that it is an controller */
 @RestController
 public class InvoiceController {
+
+
 /* WE HAVE TO MAKE SURE in this code that the invoice is handled in this code*/
+
+    @Autowired
+    InvoiceService invoiceService;
+
     @PostMapping("/invoice")
-/* using requestbody we can get the full body payload*/
-    public invoice addInvoice(@RequestBody Invoice invoice){
+
+    public Invoice addInvoice(@RequestBody Invoice invoice){
         /* whatever we are getting we cannot use it directly we need to valida*/
+        return this.invoiceService.AddInvoice(invoice);
     }
 
 
