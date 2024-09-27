@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Box, Typography, TextField, Button, styled } from '@mui/material';
-import { saveInvoice } from '../services/api';
+import { useState } from "react";
+import { TextField, Typography, Box, Button, styled } from "@mui/material";
+import { saveInvoice } from "../services/api";
 
 const Component = styled(Box)({
     marginTop: 20,
@@ -12,7 +12,7 @@ const Component = styled(Box)({
         marginRight: 20,
         minWidth: 200
     }
-});
+})
 
 const defaultObj = {
     vendor: '',
@@ -20,64 +20,62 @@ const defaultObj = {
     amount: 0,
     date: '',
     action: 'pending'
-};
+}
 
 const AddInvoice = ({ setAddInvoice }) => {
     const [invoice, setInvoice] = useState(defaultObj);
 
     const onValueChange = (e) => {
-        setInvoice({ ...invoice, [e.target.name]: e.target.value });
-    };
+        setInvoice({ ...invoice, [e.target.name]: e.target.value })
+    }
 
     const addNewInvoice = async () => {
-        try {
-            await saveInvoice({ ...invoice, amount: Number(invoice['amount']) });
-            // You might want to call setAddInvoice or reset form here
-        } catch (error) {
-            console.error('Failed to save invoice:', error);
-        }
-    };
+        await saveInvoice({ ...invoice, amount: Number(invoice['amount']) });
+
+        setAddInvoice(false);
+    }
 
     return (
         <Component>
             <Typography>Add Invoice</Typography>
             <Box>
-                <TextField
-                    variant="standard"
-                    placeholder="Enter Vendor Name"
-                    onChange={onValueChange}
+                <TextField 
                     name="vendor"
+                    variant="standard"
+                    placeholder="Enter vendor name"
+                    onChange={(e) => onValueChange(e)}
                     autoComplete="off"
                 />
-                <TextField
-                    variant="standard"
-                    placeholder="Enter Product Name"
-                    onChange={onValueChange}
+                <TextField 
                     name="product"
+                    variant="standard"
+                    placeholder="Enter product name"
+                    onChange={(e) => onValueChange(e)}
                     autoComplete="off"
                 />
-                <TextField
-                    variant="standard"
-                    placeholder="Enter Amount in $"
-                    type="number"
-                    onChange={onValueChange}
+                <TextField 
                     name="amount"
-                    autoComplete="off"
-                />
-                <TextField
                     variant="standard"
-                    placeholder="Enter Date"
-                    type="date"
-                    onChange={onValueChange}
-                    name="date"
+                    placeholder="Enter amount (in Rs)"
+                    onChange={(e) => onValueChange(e)}
+                    type="number"
                     autoComplete="off"
                 />
-                <Button variant="contained" onClick={addNewInvoice}>
-                    Add Invoice
-                </Button>
+                <TextField 
+                    name="date"
+                    variant="standard"
+                    placeholder="Enter date"
+                    onChange={(e) => onValueChange(e)}
+                    type="date"
+                    autoComplete="off"
+                />
+                <Button
+                    variant="contained"
+                    onClick={() => addNewInvoice() }
+                >Add Invoice</Button>
             </Box>
         </Component>
-    );
-};
+    )
+}
 
 export default AddInvoice;

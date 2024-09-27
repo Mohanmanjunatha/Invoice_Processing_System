@@ -8,25 +8,24 @@ import jakarta.persistence.Id;
 @Entity
 public class Invoice {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO )
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    public String vendor;
-    public String product;
-    public String date;
-    public String action;
-    public int amount;
+    private String vendor;
+    private String product;
+    private int amount;
+    private String date;
+    private String action;
 
     public Invoice() {}
-    public Invoice(long id, String vendor, String product, String date, String action, int amount) {
+
+    public Invoice(long id, String vendor, String product, int amount, String date, String action) {
         this.id = id;
         this.vendor = vendor;
         this.product = product;
+        this.amount = amount;
         this.date = date;
         this.action = action;
-        this.amount = amount;
     }
-
-
 
     public long getId() {
         return id;
@@ -52,12 +51,12 @@ public class Invoice {
         this.product = product;
     }
 
-    public String getAction() {
-        return action;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setAction(String action) {
-        this.action = action;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public String getDate() {
@@ -68,11 +67,11 @@ public class Invoice {
         this.date = date;
     }
 
-    public int getAmount() {
-        return amount;
+    public String getAction() {
+        return action;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAction(String action) {
+        this.action = action;
     }
 }
