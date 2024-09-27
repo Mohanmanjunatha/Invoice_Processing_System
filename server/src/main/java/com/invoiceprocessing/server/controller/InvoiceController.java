@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.invoiceprocessing.server.services.InvoiceService;
+
 
 /* here we are going to handle the APIs*/
 /*we have to tell spring boot that it is an controller */
@@ -20,7 +22,7 @@ public class InvoiceController {
 
     public Invoice addInvoice(@RequestBody Invoice invoice){
         /* whatever we are getting we cannot use it directly we need to valida*/
-        return this.invoiceService.AddInvoice(invoice);
+        return this.invoiceService.addInvoice(invoice);
     }
 
 
